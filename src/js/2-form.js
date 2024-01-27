@@ -23,7 +23,7 @@ form.addEventListener('input', (e) => {
     const userText = form.elements.text.value;
     const data = {
         email: userEmail,
-        input: userText,
+        input: userText
     };
     saveToLS(STORAGE_KEY, data);
 })
