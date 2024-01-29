@@ -1,11 +1,11 @@
 const STORAGE_KEY = 'feedback-form-state';
 const form = document.querySelector('.feedback-form');
 form.addEventListener('input', (e) => {
-    const userEmail = form.elements.email.value;
-    const userText = form.elements.message.value;
+    const userEmail = form.elements.email.value.trim();
+    const userText = form.elements.message.value.trim();
     const data = {
-        email: userEmail.trim(),
-        message: userText.trim(),
+        email: userEmail,
+        message: userText,
     };
     saveToLS(STORAGE_KEY, data);
 });
@@ -28,7 +28,7 @@ function restoreFromLS() {
    form.elements.email.value = data.email || '';
   form.elements.message.value = data.message || '';
 };
-
+restoreFromLS()
 
 form.addEventListener('submit', e => {
     e.preventDefault();
