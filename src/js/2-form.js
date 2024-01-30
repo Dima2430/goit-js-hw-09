@@ -10,7 +10,7 @@ form.addEventListener('input', (e) => {
     saveToLS(STORAGE_KEY, data);
 });
 
-function saveToLS(key, value = "") {
+function saveToLS(key, value) {
     const data = JSON.stringify(value);
     localStorage.setItem(key,data)
 };
@@ -25,8 +25,8 @@ function loadFromLS(key) {
 };
 function restoreFromLS() {
     const data = loadFromLS(STORAGE_KEY) || {};
-   form.elements.email.value = data.email || '';
-  form.elements.message.value = data.message || '';
+  form.elements.email.value = data.email ?? '';
+form.elements.message.value = data.message ?? '';
 };
 restoreFromLS()
 
@@ -35,6 +35,12 @@ form.addEventListener('submit', e => {
     const data = loadFromLS(STORAGE_KEY) || {};
     console.log(data);
 
+ const userEmail = form.elements.email.value.trim();
+    const userText = form.elements.message.value.trim();
+if (!userEmail || !userText) {
+     alert('Please fill in all required fields.');
+        return;
+}
     localStorage.removeItem(STORAGE_KEY);
     form.reset();
 });
