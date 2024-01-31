@@ -32,15 +32,25 @@ restoreFromLS()
 
 form.addEventListener('submit', e => {
     e.preventDefault();
-    const data = loadFromLS(STORAGE_KEY) || {};
-    console.log(data);
+    
+    // const data = loadFromLS(STORAGE_KEY) || {};
+    // console.log(data);
 
  const userEmail = form.elements.email.value.trim();
     const userText = form.elements.message.value.trim();
-if (!userEmail || !userText) {
-     alert('Please fill in all required fields.');
+    const data = {
+        userEmail,
+        userText,
+    };
+if (!userText) {
+     alert('Please fill in message field.');
         return;
-}
+} else if (!userEmail) {
+    alert('Please fill in email field.');
+    return;
+    }
+    
+     console.log(data);
     localStorage.removeItem(STORAGE_KEY);
     form.reset();
 });
